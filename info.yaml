@@ -8,7 +8,7 @@ project:
   clock_hz:     8000000           # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "3x4"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  tiles: "2x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
   top_module:  "tt_um_tv_b_gone_rom"
@@ -22,7 +22,7 @@ project:
     - "TV-B-Gone_ICE40/src/ctc_generator.sv"
     - "TV-B-Gone_ICE40/src/delay_timer.sv"
     - "TV-B-Gone_ICE40/src/tv_b_gone.sv"
-    - "TV-B-Gone_ICE40/src/tv_codes_rom.sv"
+    - "tv_codes_rom.sv"
     - "tt_um_tv_b_gone_rom.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.

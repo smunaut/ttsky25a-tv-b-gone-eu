@@ -13,7 +13,7 @@
 
   "//": "PL_TARGET_DENSITY_PCT - You can increase this if Global Placement fails with error GPL-0302.",
   "//": "Users have reported that values up to 80 worked well for them.",
-  "PL_TARGET_DENSITY_PCT": 25,
+  "PL_TARGET_DENSITY_PCT": 70,
 
   "//": "CLOCK_PERIOD - Increase this in case you are getting setup time violations.",
   "//": "The value is in nanoseconds, so 20ns == 50MHz.",
@@ -26,6 +26,8 @@
   "//": "RUN_LINTER, LINTER_INCLUDE_PDK_MODELS - Disabling the linter is not recommended!",
   "RUN_LINTER": 1,
   "LINTER_INCLUDE_PDK_MODELS": 1,
+  "QUIT_ON_SYNTH_CHECKS": 0,
+  "QUIT_ON_VERILATOR_ERRORS": 0,
 
   "//": "If you need a custom clock configuration, read the following documentation first:",
   "//": "https://tinytapeout.com/faq/#how-can-i-map-an-additional-external-clock-to-one-of-the-gpios",
@@ -58,8 +60,6 @@
   "FP_IO_HLENGTH": 2,
   "FP_IO_VLENGTH": 2,
 
-  "FP_PDN_VPITCH": 38.87,
-
   "//": "Clock",
   "RUN_CTS": 1,
 
@@ -71,5 +71,66 @@
   "MAGIC_DEF_LABELS": 0,
 
   "//": "Only export pin area in LEF (without any connected nets)",
-  "MAGIC_WRITE_LEF_PINONLY": 1
+  "MAGIC_WRITE_LEF_PINONLY": 1,
+
+  "//": "Macro",
+  "MACROS": {
+   "rom_tvbgone_32k": {
+    "instances" : {
+     "tv_gone.rom.rom32k_I" : {
+       "location": [0.0, 0.10],
+       "orientation": "FS"
+     }
+    },
+    "gds": ["dir::../macro/rom_tvbgone_32k.gds.gz"],
+    "lef": ["dir::../macro/rom_tvbgone_32k.lef"],
+    "lib": {
+        "*": ["dir::../macro/rom_tvbgone_32k.lib"]
+    }
+   },
+   "rom_tvbgone_4k0": {
+    "instances" : {
+     "tv_gone.rom.rom4k0_I" : {
+       "location": [0.0, 113.0],
+       "orientation": "FS"
+     }
+    },
+    "gds": ["dir::../macro/rom_tvbgone_4k0.gds.gz"],
+    "lef": ["dir::../macro/rom_tvbgone_4k0.lef"],
+    "lib": {
+        "*": ["dir::../macro/rom_tvbgone_4k0.lib"]
+    }
+   },
+   "rom_tvbgone_4k1": {
+    "instances" : {
+     "tv_gone.rom.rom4k1_I" : {
+       "location": [0.0, 150.5],
+       "orientation": "N"
+     }
+    },
+    "gds": ["dir::../macro/rom_tvbgone_4k1.gds.gz"],
+    "lef": ["dir::../macro/rom_tvbgone_4k1.lef"],
+    "lib": {
+        "*": ["dir::../macro/rom_tvbgone_4k1.lib"]
+    }
+   }
+  },
+
+  "//": "Macro power",
+  "//": "  Disable IR Drop report, useless anyway",
+  "RUN_IRDROP_REPORT":0,
+
+  "//": "  Have magic consider nets of same name to be connected since our power pads are not all internally connected",
+  "MAGIC_NO_EXT_UNIQUE":1,
+
+  "//": "  All met4 stripes are not connected internally, this causes PDN to crap out ...",
+  "ERROR_ON_PDN_VIOLATIONS":0,
+
+  "//": "  Config",
+  "FP_PDN_HORIZONTAL_LAYER": "met3",
+  "FP_MACRO_HORIZONTAL_HALO": "6",
+  "FP_MACRO_VERTICAL_HALO": "1",
+  "FP_PDN_VOFFSET": "5",
+  "FP_PDN_VSPACING": "1.5",
+  "FP_PDN_VPITCH": "30"
 }
